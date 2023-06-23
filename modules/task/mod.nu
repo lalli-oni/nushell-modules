@@ -52,31 +52,6 @@ export def mr-list [] {
     return $mergeRequests
 }
 
-export def input-table [column: string] {
-    let table = $in
-    let pipelineInputType = ($table | describe)
-
-    if $pipelineInputType !~ 'table' {
-        print "Pipeline type error. Expecting table"
-        return 1
-    }
-
-    let userSelection = ($table | input list)
-
-    # (WIP): Trying to use `input` to listen to Up/Down/Enter/Esc
-    # let selectionIndex = 0
-    # let userInput = 'bob'
-
-    
-    # while $userInput != 'close' {
-    #     $table | each { |it| print $it }
-    #     let userInput = input --bytes-until --suppress-output
-    #     print $userInput
-    # }
-
-    return $userSelection
-}
-
 # Returns the relative age based on now
 export def relative-age [date: string] {
     if $date == null { return '' }
@@ -99,18 +74,3 @@ export def relative-age [date: string] {
     }
     return $duration
 }
-
-# Updates all cells of a column
-# def update-column [columnId: string ] {
-#     let pipelineInputType = ($in | describe)
-
-#     if $pipelineInputType starts-with 'table' {
-#         $in
-#     }
-#     else {
-#         print "error"
-#         return
-#     }
-
-#     $pipelineInputType
-# }
