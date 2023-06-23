@@ -30,7 +30,7 @@ export def mr-list [] {
     let mergeRequests = ($mergeRequests | update title { $in | str replace $"($issuePattern): " '' })
 
     # Get each mr details
-    let mrDetails = ($mergeRequests | get gitlab_id | par-each { |it| glab api $"/projects/($projectId)/merge_requests/($it)" | from json } | sort-by iid | select state iid merge_error has_conflicts author head_pipeline)
+    let mrDetails = ($mergeRequests | get gitlab_id | par-each { |it| glab api $"/projects/($projectId)/merge_requests/($it)" | from json } | sort-by iid | select state iid has_conflicts author head_pipeline)
     # Merge mr details
     let mergeRequests = ($mergeRequests | merge $mrDetails)
 
@@ -40,10 +40,10 @@ export def mr-list [] {
     let mergeRequests = ($mergeRequests | merge $mrDiscussions)
 
     let mergeRequests = ($mergeRequests | insert pipeline { $in | if $in.head_pipeline.status == 'success' { $"✅" } else { $"❌ \((relative-age $in.head_pipeline.started_at)\)" } })
-    let mergeRequests = ($mergeRequests | select gitlab_id jira_id title isDraft state merge_error has_conflicts author.name last_comment_at pipeline)
+    let mergeRequests = ($mergeRequests | select gitlab_id jira_id title isDraft state has_conflicts author.name last_comment_at pipeline)
     let mergeRequests = ($mergeRequests | update jira_id { $in | if $in =~ 'NO_ISSUE' { '' } else { $in }})
     let mergeRequests = ($mergeRequests | update isDraft { $in | if $in == true { '✏️' } else { '' }})
-    let mergeRequests = ($mergeRequests | update author_name { $in | if $in =~ 'Larus Thor Johannsson' { '@me' } else { $in }})
+    let mergeRequests = ($mergeRequests | update author_name { $in | if $in =~ 'Larus Thor Johannsson' { $'(ansi white_bold)@me(ansi reset)' } else { $in }})
     # NOTE (LÞJ): Maybe we can merge `merge_error` and `has_conflicts` to a column showing any blockers
     # TODO (LÞJ): Missing "ready to be merged" state
     let mergeRequests = ($mergeRequests | update has_conflicts { $in | if $in == true { '❌' } else { '✅' }})
