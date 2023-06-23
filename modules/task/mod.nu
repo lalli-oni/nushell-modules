@@ -39,7 +39,7 @@ export def mr-list [] {
     # Merge last discussion update
     let mergeRequests = ($mergeRequests | merge $mrDiscussions)
 
-    let mergeRequests = ($mergeRequests | insert pipeline { $in | if $in.head_pipeline.status == 'success' { $"✅ \((relative-age $in.head_pipeline.finished_at)\)" } else { $"($in.head_pipeline.status) \((relative-age $in.head_pipeline.started_at)\)" } })
+    let mergeRequests = ($mergeRequests | insert pipeline { $in | if $in.head_pipeline.status == 'success' { $"✅" } else { $"❌ \((relative-age $in.head_pipeline.started_at)\)" } })
     let mergeRequests = ($mergeRequests | select gitlab_id jira_id title isDraft state merge_error has_conflicts author.name last_comment_at pipeline)
     let mergeRequests = ($mergeRequests | update jira_id { $in | if $in =~ 'NO_ISSUE' { '' } else { $in }})
     let mergeRequests = ($mergeRequests | update isDraft { $in | if $in == true { '✏️' } else { '' }})
