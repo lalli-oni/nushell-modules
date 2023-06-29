@@ -10,6 +10,9 @@ export def mr-list [] {
     # Used to match repos
     # TODO [bug]: Not matching the folder name to repo name
     let currentDirectory = (git rev-parse --show-toplevel | split row "/" | last)
+    if ($currentDirectory == "") {
+        return null
+    }
 
     # Gets gitlab merge requests as table
     #   Columns: id, repo, title, targets, isDraft
