@@ -22,7 +22,7 @@ export def tasks [] {
     }
 
     let projectId = ($mrList.0 | parse --regex "(on )(?P<project_name>.+)( \\(Page )" | get project_name | first | str replace '/' '%2F')
-    let mergeRequests = ($mrList | skip 2 | drop 1 | parse --regex "!(?P<gitlab_id>.+?)\\s+(?P<repo>.+?)!\\d+\\s+(?P<title>.+?)\\t+(?P<targets>.+)" | sort-by gitlab_id | insert isDraft { $in.title | str contains "Draft:" })
+    let mergeRequests = ($mrList | skip 2 | drop 1 | parse --regex "!(?P<gitlab_id>.+?)\\s+(?P<repo>.+?)!\\d+\\s+(?P<title>.+?)\\t+(?P<targets>.+)" | sort-by gitlab_id --reverse | insert isDraft { $in.title | str contains "Draft:" })
     # Remove `Draft: ` prefix from title column
     let mergeRequests = ($mergeRequests | update title { $in | if $in =~ 'Draft: ' { $in | str substring 7.. } else { $in }})
     # Extract jira/issue id from title
