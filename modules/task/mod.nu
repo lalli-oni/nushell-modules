@@ -47,7 +47,7 @@ export def tasks [] {
     let mergeRequests = ($mergeRequests | update isDraft { $in | if $in == true { '✏️' } else { '' }})
     let mergeRequests = ($mergeRequests | update author_name { $in | if $in =~ 'Larus Thor Johannsson' { $'(ansi white_bold)@me(ansi reset)' } else { $in }})
     # TODO (LÞJ): Maybe aggregate `merge_error`, `has_conflicts` and any other information into "Can be merged"
-    let mergeRequests = ($mergeRequests | update has_conflicts { $in | if $in == true { '❌' } else { '✅' }})
+    let mergeRequests = ($mergeRequests | update has_conflicts { $in | if $in == true { '⚔️' } else { '' }})
     # TODO (LÞJ): Maybe show who made the comment?
     let mergeRequests = ($mergeRequests | update last_comment_at { $in | relative-age $in})
     return $mergeRequests
