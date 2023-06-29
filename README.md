@@ -3,11 +3,13 @@
 Development of user-centric nushell scripts with focus on improving Developer Experience through integrations.
 Intended as a learning repository, establishing best practices and help developers get started with nushell.
 
+Docs: https://lalli-oni.github.io/nushell-modules/
+
 ## Dependencies
-- (gum)[https://github.com/charmbracelet/gum] - for user input
-- (glab CLI)[https://docs.gitlab.com/ee/integration/glab/] - for CI/CD integration
-- ?(jira CLI)[https://github.com/ankitpokhrel/jira-cli] - for Project management integration
-- (git CLI)[https://git-scm.com/book/en/v2/Getting-Started-The-Command-Line] - for local version control
+- [gum](https://github.com/charmbracelet/gum) - for user input and formatting
+- [glab CLI](https://docs.gitlab.com/ee/integration/glab/) - for CI/CD integration
+- ?[jira CLI](https://github.com/ankitpokhrel/jira-cli) - for Project management integration
+- [git CLI](https://git-scm.com/book/en/v2/Getting-Started-The-Command-Line) - for local version control
 
 ## Integrations
 ### Project Management
@@ -17,12 +19,13 @@ Intended as a learning repository, establishing best practices and help develope
 ### Version Control
 - git
 ### Code editor
-- code (VS Code)
+- VS Code
 
 ## Getting started
 [WIP] Issue #2
 1. Install `nushell`
-2. Add `source {module path}/main.nu` to your `config.nu`
+2. Fetch repository
+3. Add `source {module path}/main.nu` to your `config.nu`
 
 ## High level goals
 1. Easy to use
@@ -31,10 +34,9 @@ Intended as a learning repository, establishing best practices and help develope
   c. Cross-platform
 2. Define development workflows
 3. Define development toolset
-4. Provide guides to `nushell` development
-5. Minimize tool shifting
-6. Make user input quick and as native as possible
-7. Display information in an easily digestible manner
+4. Minimize tool shifting
+5. Make user input as pleasant as possible
+6. Display information in an easily digestible manner
 
 ## Contributing
 @lalli-oni: Contributions are more than welcome. Feel free to create issues and comments. A framework around this is WIP.
