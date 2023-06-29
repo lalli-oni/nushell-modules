@@ -1,7 +1,7 @@
 #!/usr/bin/env nu
 
 # list merge requests active in gitlab
-export def mr-list [] {
+export def tasks [] {
     let issuePattern = "(?P<issue>NO_ISSUE|(\\w+-\\d+))"
     let now = (date now)
 
@@ -44,11 +44,11 @@ export def mr-list [] {
 
     let mergeRequests = ($mergeRequests | insert pipeline { $in | if $in.head_pipeline.status == 'success' { $"✅" } else { $"❌ \((relative-age $in.head_pipeline.started_at)\)" } })
     let mergeRequests = ($mergeRequests | select gitlab_id jira_id title isDraft state has_conflicts author.name last_comment_at pipeline)
+    # TODO: Make gitlab_id and jira_id columns links
     let mergeRequests = ($mergeRequests | update jira_id { $in | if $in =~ 'NO_ISSUE' { '' } else { $in }})
     let mergeRequests = ($mergeRequests | update isDraft { $in | if $in == true { '✏️' } else { '' }})
     let mergeRequests = ($mergeRequests | update author_name { $in | if $in =~ 'Larus Thor Johannsson' { $'(ansi white_bold)@me(ansi reset)' } else { $in }})
-    # NOTE (LÞJ): Maybe we can merge `merge_error` and `has_conflicts` to a column showing any blockers
-    # TODO (LÞJ): Missing "ready to be merged" state
+    # TODO (LÞJ): Maybe aggregate `merge_error`, `has_conflicts` and any other information into "Can be merged"
     let mergeRequests = ($mergeRequests | update has_conflicts { $in | if $in == true { '❌' } else { '✅' }})
     # TODO (LÞJ): Maybe show who made the comment?
     let mergeRequests = ($mergeRequests | update last_comment_at { $in | relative-age $in})
