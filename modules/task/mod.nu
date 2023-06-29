@@ -17,9 +17,7 @@ export def tasks [] {
     # Gets gitlab merge requests as table
     #   Columns: id, repo, title, targets, isDraft
     let mrList = (glab mr list | lines)
-
-    if ($mrList == 'glab: 404 Project Not Found (HTTP 404)' or ($mrList | is-empty)) {
-        print "Error: 404. Not found."
+    if (($mrList | is-empty) or ($mrList | all {|mr| $mr | is-empty})) {
         return null
     }
 
