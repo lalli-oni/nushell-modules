@@ -1,3 +1,7 @@
+/* Creating a slot used to render content based on hashed routing */
+/* In human words: making the web app a SPA using only HTML/css */
+/* Shamelessly stolen from https://dev.to/iamschulz/let-s-write-an-spa-in-css-4kck */
+
 #content-slot {
     position: relative;
     width: 100%;
