@@ -1,5 +1,4 @@
 #!/usr/bin/env nu
-# testing/mod.nu
 
 export def test-runner [] {
     let config = (npx jest --showConfig | from json).configs.0?
@@ -19,8 +18,9 @@ export def test-runner [] {
     # TODO: allow control over whether tests are run in parallel or not
     # TODO: allow control over cache
     mut retry = 0
+    mut report = null
     while ($retry == 0) {
-        let report = (run-tests $runPattern)
+        $report = (run-tests $runPattern)
         print $"TOTAL ($report.numTotalTestSuites) suites / ($report.numTotalTests) tests"
         print $"PASSED: ($report.testResults | where $it.status == "passed" | get name | str replace -s -a $config.rootDir '')"
         let failedTests = ($report.testResults | where status != "passed")
@@ -41,7 +41,7 @@ export def test-runner [] {
         }
         $retry = (gum confirm "Rerun test?" | complete).exit_code
     }
-    return "bob"
+    return $report
 }
 
 def run-tests [runPattern: string] {
