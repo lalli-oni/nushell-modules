@@ -6,8 +6,19 @@
     --white: #FFFFFF;
 }
 
+@font-face {
+    font-family: "Fjalla One";
+    src: url("FjallaOne-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Josefin Sans";
+    src: url("JosefinSans-VariableFont-wght.woff2") format("woff2");
+}
+
 html, body {
     height: 100%;
+    font-family: "Josefin Sans"
 }
 
 body {
@@ -19,8 +30,10 @@ body {
 }
 
 
-main > h1 {
+main h1 {
+    font-family: "Fjalla One";
     color: var(--primary-color);
+    font-size: 2rem;
 }
 
 nav > ol {
