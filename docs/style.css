@@ -2,6 +2,7 @@
     --primary-color: #faea73;
     --secondary-color: #f0bc5c;
     --background-color: #6d7475;
+    --code-background-color: #9eb0b3;
     --highlight-color: #2A0C4E;
     --white: #FFFFFF;
 }
@@ -77,4 +78,13 @@ nav a {
 
 a:hover {
     color: var(--highlight-color);
+}
+
+code {
+    background: var(--code-background-color);
+    padding: 2px;
+    border-radius: 5px;
+    border: 1px black;
+    color: var(--primary-color);
+    font-weight: bold;
 }
