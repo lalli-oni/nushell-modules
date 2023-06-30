@@ -44,6 +44,11 @@ main section {
     gap: 2rem;
 }
 
+main ul, main ol {
+    /* Hack to prevent Josefin Sans lines from overlapping. */
+    line-height: 1.5rem;
+}
+
 nav {
     background: var(--background-color);
     border-radius: 0 0 50px 0;
