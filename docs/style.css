@@ -28,9 +28,12 @@ body {
     color: var(--secondary-color);
     display: flex;
     flex-direction: row;
-    gap: 2rem;
+    margin: 0;
 }
 
+main {
+    margin: 3rem;
+}
 
 main h1 {
     font-family: "Fjalla One";
@@ -38,11 +41,23 @@ main h1 {
     font-size: 2rem;
 }
 
-nav > ol {
-    padding: 0 2rem;
+main section {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
+}
+
+nav {
+    background: var(--background-color);
+    border-radius: 0 0 50px 0;
+    height: fit-content;
+}
+
+nav > ol {
+    padding: 3rem 3rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     align-items: center;
 }
 
