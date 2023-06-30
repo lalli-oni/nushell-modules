@@ -16,6 +16,7 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#learn">Learn</a></li>
             <li><a href="#modules">Modules</a></li>
+            <li><a href="#about">About</a></li>
         </ol>
     </nav>
     <main id="content-slot">
@@ -34,6 +35,24 @@
         <section id="learn">
             <h1>Learn nushell</h1>
             <p>Intent: provide cookbook, best practices...</p>
+            <div>
+                <h2>Getting started writing nushell</h2>
+                <ol>
+                    <li>Install terminal</li>
+                    <li>Install nushell</li>
+                    <li>Integrate nushell into your terminal</li>
+                    <li>Setup code editor</li>
+                </ol>
+            </div>
+            <div>
+                <h2>Further enhancements</h2>
+                <ol>
+                    <li>Testing your scripts</li>
+                    <li>Hot Reloading of modules</li>
+                    <li>Publishing your modules</li>
+                    <li>Code formatting/linting</li>
+                </ol>
+            </div>
         </section>
         <section id="modules">
             <h1>Modules</h1>
@@ -47,12 +66,43 @@
                 </ul>
             </div>
             <div>
+                <h2>Installation</h2>
+                <ol>
+                    <li>Fetch nushell-modules repository: <code>git fetch https://github.com/lalli-oni/nushell-modules.git</code></li>
+                    <li>Source modules in your <code>config.nu</code>: <code>source {location}/scripts/main.nu</code></li>
+                </ol>
+            </div>
+            <div>
                 <h2>tasks</h2>
                 <p>Managing overall tasks. Includes project management, version control, development, integration and delivery.</p>
             </div>
             <div>
                 <h2>testing</h2>
                 <p>Helpful scripts to manage testing in local development.</p>
+            </div>
+        </section>
+        <section id="about">
+            <h1>About</h1>
+            <div>
+                <h2>Me</h2>
+                <p>Larus Thor (@lalli-oni). Originally from Iceland, living in Denmark. Varied background but shifted my focus towards frontend engineering. I like to throw myself at problems with the least amount of attention. And frontend zeitgeist has struck me as being reductionist and (please excuse the drama) marginalised.</p>
+                <p>Hopefully with traction this becomes less about me and more about the project value.</p>
+            </div>
+            <div>
+                <h2>Project Background</h2>
+                <p>After fucking up rebasing my feature branches on release branch 😅 embarassingly many times I decided to write a shell script to both automate the process and to understand better what I was doing wrong/right.</p>
+                <p>Originally I created this script in zsh. Finding the language and environment extremely undfriendly. Making it hard to write good code. Being unsatisfied I looked a bit into other terminal approaches, like ruby or googles zx (js). But adding a language layer on top of the shell breaks my top programming annoyance: mixing programming languages (currently working with tsx, the oriny is not lost on me).</p>
+                <p>Took surprisingly long to encounter nushell, which seems to tick a lot of my boxes in terms of philosophy. I hope to help address (imo) the biggest flaw of nushell: lack of resources. The documentation is subjectively decent, but I find it lacking in some key aspects which I hope to contribute to either here or directly.</p>
+            </div>
+            <div>
+                <h2>Web app(?)</h2>
+                <p>As I mentioned above, I focus on frontend, and unsurprisingly most of my work is in web apps (notably: ts, vue, react, svelte, jQuery, webpack). Utilising this web page also as a personal learning resource (in hopes of sharing) I decided to see how far native HTML/css can take you in developing a modern web app. But is it a web app? You are viewing a HTML <strong>document</strong>after all. What makes this an app(lication)?</p>
+                <p>Please don't take this experiment as a message of native superiority over the various web app frameworks but as a learning experiment.</p>
+                <h3>Features</h3>
+                <ul>
+                    <li>SPA (using hash based routing)</li>
+                    <li></li>
+                </ul>
             </div>
         </section>
     </main>
