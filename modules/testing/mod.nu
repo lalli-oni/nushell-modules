@@ -1,8 +1,10 @@
 #!/usr/bin/env nu
 
 export def test-runner [] {
+    # TODO: Have some sanity check to see if we should waste time. fx. if there are no js projects
     let config = (npx jest --showConfig | from json).configs.0?
-    let tests = (npx jest --listTests | str replace -s -a $config.rootDir '')
+    # TODO: Removed -s flag due to it being unsupported. maybe it was deprecated?
+    let tests = (npx jest --listTests | str replace -a $config.rootDir '')
     # Q: Maybe order on last tests run? or based on files modified?
     let choice = ($tests | split row "\n" | sort | str join "\n" | gum choose --no-limit | split row "\n")
     let runPattern = ($choice | str join '|')
@@ -22,11 +24,13 @@ export def test-runner [] {
     while ($retry == 0) {
         $report = (run-tests $runPattern)
         print $"TOTAL ($report.numTotalTestSuites) suites / ($report.numTotalTests) tests"
-        print $"PASSED: ($report.testResults | where $it.status == "passed" | get name | str replace -s -a $config.rootDir '')"
+        # TODO: Removed -s flag due to it being unsupported. maybe it was deprecated?
+        print $"PASSED: ($report.testResults | where $it.status == "passed" | get name | str replace -a $config.rootDir '')"
         let failedTests = ($report.testResults | where status != "passed")
         print $failedTests
         if (($failedTests | is-empty) == false) {
-            let failedTests = ($failedTests | flatten | flatten | insert short_name { $in.name | str replace -s -a $config.rootDir '' } | group-by short_name)
+            # TODO: Removed -s flag due to it being unsupported. maybe it was deprecated?
+            let failedTests = ($failedTests | flatten | flatten | insert short_name { $in.name | str replace -a $config.rootDir '' } | group-by short_name)
             for test in ($failedTests | transpose key value) {
                 # TODO: (bug) each assertion can have 1 or more ancestorTitles
                 # TODO: (bug) doesnt seem to correctly list passed/failed tests in suite
